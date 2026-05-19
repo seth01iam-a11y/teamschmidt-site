@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Mode Test | teamschmidt.net</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDT6VHEBSE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PDT6VHEBSE');
+</script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e8e8e8; }
+.token { font-weight: bold; color: #D4A574; }
+a { color: #D4A574; }
+@media (max-width: 768px) {
+  body { overflow-x: hidden; }
+  * { max-width: 100%; }
+  section, .hero { padding: 50px 20px !important; }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.5rem) !important; line-height: 1.3 !important; }
+  h2 { font-size: clamp(1.4rem, 4vw, 2rem) !important; }
+  p { font-size: 1rem !important; }
+  [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  .cta-buttons { flex-direction: column !important; align-items: center !important; gap: 12px !important; }
+  .cta-buttons a { width: 100% !important; max-width: 320px !important; text-align: center !important; }
+  .about-row { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+}
+</style>
+</head>
+<body>
+<style>
+/* Layout override for dark mode full-bleed */
+h1.entry-title{display:none!important}
+#secondary,.sidebar,.widget-area,.ast-sidebar-wrap{display:none!important}
+.ast-page-title,.entry-header{display:none!important}
+.ast-container,.ast-article-single{max-width:100%!important;padding:0!important;margin:0!important}
+.entry-content,.entry-content>.wp-block-html{max-width:100%!important;padding:0!important;margin:0!important}
+.dm-wrap{width:100vw!important;max-width:100vw!important;margin-left:-50vw!important;left:50%!important;position:relative!important;overflow:hidden!important}
+</style>
+<!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+html{scroll-behavior:smooth}
+.dm-wrap{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;position:relative;width:100vw;left:50%;margin-left:-50vw;--green:#00ff88;--green-glow:rgba(0,255,136,0.30);--cyan:#00d4ff;--bg:#0a0a0a;--bg2:#0f0f0f;--bgcard:rgba(255,255,255,0.034);--border:rgba(255,255,255,0.07);--border-green:rgba(0,255,136,0.20);--text:#f4f4f4;--muted:#888;--dim:#484848;--max:900px;background:var(--bg);color:var(--text);overflow:hidden}
+.dm-wrap *{box-sizing:border-box;margin:0;padding:0}
+.dm-wrap a{text-decoration:none}
+.dm-hero{position:relative;padding:7rem 2.5rem 6rem;text-align:center;overflow:hidden;background:var(--bg)}
+.dm-hero-glow{position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:860px;height:620px;background:radial-gradient(ellipse at 50% 40%,rgba(0,255,136,0.13) 0%,rgba(0,212,255,0.06) 35%,transparent 70%);pointer-events:none;animation:glowPulse 7s ease-in-out infinite;border-radius:50%}
+@keyframes glowPulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.12)}}
+.dm-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,black 20%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,black 20%,transparent 80%);pointer-events:none}
+.dm-hero-fade{position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:2}
+.dm-hero-inner{position:relative;z-index:3;max-width:var(--max);margin:0 auto}
+.dm-avatar{width:68px;height:68px;border-radius:50%;background:rgba(0,255,136,.08);border:1.5px solid rgba(0,255,136,.5);display:inline-flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--green);margin-bottom:2rem;box-shadow:0 0 0 5px rgba(0,255,136,.06),0 0 32px rgba(0,255,136,.22);letter-spacing:.5px;position:relative}
+.dm-avatar::before{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(0,255,136,.18);animation:ringPulse 3s ease-in-out infinite}
+@keyframes ringPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.dm-eyebrow{display:block;font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--green);text-transform:uppercase;margin-bottom:1.5rem;opacity:.8}
+.dm-hero h1{font-size:clamp(36px,5.5vw,62px);font-weight:800;color:var(--text);line-height:1.1;margin-bottom:1.5rem;letter-spacing:-.035em}
+.dm-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--green) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dm-hero-sub{font-size:17.5px;color:var(--muted);line-height:1.78;max-width:500px;margin:0 auto 2.25rem;font-weight:400}
+.dm-cred-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:2.75rem}
+.dm-pill{font-size:11.5px;font-weight:500;color:rgba(0,255,136,.85);background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.18);padding:5px 15px;border-radius:99px;letter-spacing:.02em}
+.dm-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#000!important;font-size:15px;font-weight:700;padding:15px 38px;border-radius:12px;text-decoration:none!important;transition:all .25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 28px rgba(0,255,136,.35),0 4px 20px rgba(0,0,0,.4);letter-spacing:.01em}
+.dm-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 50px rgba(0,255,136,.55),0 8px 30px rgba(0,0,0,.5);color:#000!important}
+.dm-section{padding:5.5rem 2.5rem;position:relative;border-top:1px solid var(--border)}
+.dm-section:nth-child(odd){background:var(--bg2)}
+.dm-section:nth-child(even){background:var(--bg)}
+.dm-section-inner{max-width:var(--max);margin:0 auto}
+.dm-label{display:block;font-size:10.5px;font-weight:600;letter-spacing:.2em;color:var(--green);text-transform:uppercase;margin-bottom:1rem;opacity:.75}
+.dm-section h2{font-size:clamp(24px,3.2vw,36px);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:1rem;letter-spacing:-.025em;max-width:620px}
+.dm-section-lead{font-size:16px;color:var(--muted);line-height:1.78;max-width:580px;margin-bottom:3rem}
+.dm-why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dm-why-card{background:var(--bgcard);border:1px solid var(--border);border-radius:18px;padding:1.75rem 1.5rem;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:all .3s ease;position:relative;overflow:hidden}
+.dm-why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,136,.4),transparent);opacity:0;transition:opacity .3s ease}
+.dm-why-card:hover{border-color:rgba(0,255,136,.22);transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 0 1px rgba(0,255,136,.08);background:rgba(0,255,136,.04)}
+.dm-why-card:hover::before{opacity:1}
+.dm-why-icon{font-size:28px;color:var(--green);margin-bottom:1rem;display:block;filter:drop-shadow(0 0 10px rgba(0,255,136,.4))}
+.dm-why-card h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:.5rem;letter-spacing:-.01em}
+.dm-why-card p{font-size:13.5px;color:var(--muted);line-height:1.67}
+.dm-results{display:flex;flex-direction:column;gap:12px}
+.dm-result{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:2rem;background:var(--bgcard);border:1px solid var(--border);border-radius:16px;padding:1.625rem 2rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .3s ease;position:relative;overflow:hidden}
+.dm-result::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--green),var(--cyan));border-radius:3px 0 0 3px}
+.dm-result:hover{transform:translateX(6px);border-color:rgba(0,255,136,.15);box-shadow:-6px 0 30px rgba(0,255,136,.12),0 4px 20px rgba(0,0,0,.3)}
+.dm-result-num{font-size:48px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:-.04em;text-align:center}
+.dm-result-text strong{display:block;font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-.01em}
+.dm-result-text{font-size:13.5px;color:var(--muted);line-height:1.65}
+.dm-about-card{display:flex;gap:2rem;align-items:flex-start;background:var(--bgcard);border:1px solid var(--border);border-radius:20px;padding:2.25rem 2rem;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:all .3s ease;margin-top:2.5rem}
+.dm-about-card:hover{border-color:rgba(0,255,136,.15);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.dm-about-avatar{width:64px;height:64px;border-radius:50%;background:rgba(0,255,136,.08);border:1.5px solid rgba(0,255,136,.4);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:var(--green);flex-shrink:0;box-shadow:0 0 24px rgba(0,255,136,.2)}
+.dm-about-name{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.02em;margin-bottom:4px}
+.dm-about-title{font-size:12.5px;color:#666;margin-bottom:1rem;line-height:1.55}
+.dm-about-bio{font-size:14.5px;color:var(--muted);line-height:1.72}
+.dm-services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.dm-service{background:var(--bgcard);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.375rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .3s ease;position:relative;overflow:hidden}
+.dm-service-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.dm-service:hover{border-color:rgba(0,255,136,.18);transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.5),0 0 0 1px rgba(0,255,136,.06)}
+.dm-service:hover .dm-service-bar{transform:scaleX(1)}
+.dm-service-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:.75rem}
+.dm-service-top i{font-size:22px;color:var(--green);filter:drop-shadow(0 0 6px rgba(0,255,136,.3));flex-shrink:0;margin-top:1px}
+.dm-service-top span{font-size:14px;font-weight:600;color:var(--text);line-height:1.3;letter-spacing:-.01em}
+.dm-service p{font-size:12.5px;color:var(--muted);line-height:1.65}
+.dm-cta{padding:6rem 2.5rem;text-align:center;background:var(--bg);position:relative;overflow:hidden;border-top:1px solid var(--border)}
+.dm-cta-glow{position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,255,136,.10) 0%,transparent 70%);pointer-events:none;border-radius:50%}
+.dm-cta-inner{position:relative;z-index:2;max-width:540px;margin:0 auto}
+.dm-cta h2{font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);margin-bottom:1rem;letter-spacing:-.03em}
+.dm-cta-desc{font-size:16.5px;color:var(--muted);line-height:1.75;margin-bottom:2.75rem}
+.dm-cta-box{background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.14);border-radius:22px;padding:2.5rem 2.25rem;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.dm-cta-box-text{font-size:14.5px;color:#888;line-height:1.72;margin-bottom:2rem}
+.dm-email-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#000!important;font-size:15.5px;font-weight:700;padding:16px 28px;border-radius:13px;text-decoration:none!important;margin-bottom:1.125rem;transition:all .25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 32px rgba(0,255,136,.35),0 4px 20px rgba(0,0,0,.4);letter-spacing:.01em}
+.dm-email-btn:hover{transform:translateY(-3px);box-shadow:0 0 56px rgba(0,255,136,.55),0 10px 28px rgba(0,0,0,.5);color:#000!important}
+.dm-email-btn i{font-size:21px}
+.dm-cta-note{font-size:12px;color:rgba(0,255,136,.55);letter-spacing:.03em}
+.dm-footer{padding:2rem 2.5rem;text-align:center;background:var(--bg);border-top:1px solid var(--border)}
+.dm-footer p{font-size:12.5px;color:var(--dim);letter-spacing:.04em}
+@media(max-width:800px){.dm-why-grid{grid-template-columns:1fr}.dm-services-grid{grid-template-columns:1fr 1fr}.dm-result{grid-template-columns:80px 1fr;gap:1.5rem}.dm-result-num{font-size:38px}.dm-about-card{flex-direction:column;gap:1.25rem}}
+@media(max-width:520px){.dm-services-grid{grid-template-columns:1fr}.dm-result{grid-template-columns:1fr;text-align:center}.dm-result::before{display:none}.dm-hero h1{font-size:34px}}</style>
+<div class="dm-wrap">
+<section class="dm-hero"><div class="dm-hero-glow"></div><div class="dm-hero-grid"></div><div class="dm-hero-fade"></div>
+<div class="dm-hero-inner"><div class="dm-avatar">SS</div><span class="dm-eyebrow">Digital consulting for local businesses</span>
+<h1>Big-business marketing know-how,<br><em>built for your business.</em></h1>
+<p class="dm-hero-sub">I spent 10 years driving digital growth at an enterprise level. Now I help small, local businesses get those same results &#8212; without the corporate price tag.</p>
+<div class="dm-cred-row"><span class="dm-pill">10 yrs enterprise digital</span><span class="dm-pill">Brookfield, WI</span><span class="dm-pill">UW-Milwaukee &#183; Marketing + CS</span></div>
+<a class="dm-btn" href="#dm-contact">Let&#8217;s talk &#8594;</a></div></section>
+<section class="dm-section"><div class="dm-section-inner"><span class="dm-label">Why it matters</span>
+<h2>The right digital setup doesn&#8217;t just look good &#8212; it makes money.</h2>
+<p class="dm-section-lead">Most small businesses are missing revenue they don&#8217;t even know about. The fix isn&#8217;t always a bigger ad budget &#8212; it&#8217;s smarter systems, a better customer experience, and tools that work while you sleep.</p>
+<div class="dm-why-grid">
+<div class="dm-why-card"><i class="dm-why-icon ti ti-shopping-cart"></i><h3>Sell around the clock</h3><p>Online ordering and booking systems that bring in revenue even when you&#8217;re closed.</p></div>
+<div class="dm-why-card"><i class="dm-why-icon ti ti-repeat"></i><h3>Keep customers loyal</h3><p>Retention programs that turn one-time buyers into regulars who refer their friends.</p></div>
+<div class="dm-why-card"><i class="dm-why-icon ti ti-chart-bar"></i><h3>Know what&#8217;s working</h3><p>Clear, simple reporting so every decision you make is backed by real data.</p></div>
+</div></div></section>
+<section class="dm-section"><div class="dm-section-inner"><span class="dm-label">Real results</span>
+<h2>I&#8217;ve done this at scale. I can do it for you.</h2>
+<p class="dm-section-lead">Real outcomes from enterprise digital programs &#8212; the same playbook, adapted for your business.</p>
+<div class="dm-results">
+<div class="dm-result"><div class="dm-result-num">15%</div><div class="dm-result-text"><strong>Average sales lift</strong>for local dealers in a distributed marketing program I launched &#8212; by giving them better digital tools and a clear strategy to use them.</div></div>
+<div class="dm-result"><div class="dm-result-num">30%</div><div class="dm-result-text"><strong>Cost reduction</strong>achieved by migrating a major loyalty platform &#8212; proof that the right systems save real money over time.</div></div>
+<div class="dm-result"><div class="dm-result-num">$1B</div><div class="dm-result-text"><strong>Loyalty program</strong>modernized end-to-end &#8212; deep experience building customer retention systems that keep businesses growing long-term.</div></div>
+</div></div></section>
+<section class="dm-section"><div class="dm-section-inner"><span class="dm-label">About me</span>
+<h2>A marketer who also speaks tech.</h2>
+<div class="dm-about-card"><div class="dm-about-avatar">SS</div>
+<div><div class="dm-about-name">Seth Schmidt</div>
+<div class="dm-about-title">Digital Programs Manager &#183; Pentair &nbsp;|&nbsp; BA Marketing, Minor CS &#183; UW-Milwaukee</div>
+<p class="dm-about-bio">I&#8217;m a digital product leader with a decade of experience building programs that grow revenue, keep customers loyal, and make marketing measurable. My marketing brain and tech background let me bridge strategy and execution in a way most consultants can&#8217;t.</p>
+</div></div></div></section>
+<section class="dm-section"><div class="dm-section-inner"><span class="dm-label">What I can help with</span>
+<h2>Practical tools and strategy that drive real revenue.</h2>
+<p class="dm-section-lead">Think less &#8220;post on Instagram&#8221; and more &#8220;set up systems that grow your business.&#8221;</p>
+<div class="dm-services-grid">
+<div class="dm-service"><div class="dm-service-top"><i class="ti ti-shopping-cart"></i><span>Online ordering &amp; booking</span></div><p>Get set up to take orders, reservations, or appointments online &#8212; and stop losing customers who won&#8217;t pick up the phone.</p><div class="dm-service-bar"></div></div>
+<div class="dm-service"><div class="dm-service-top"><i class="ti ti-heart"></i><span>Customer loyalty programs</span></div><p>Simple, effective rewards programs that keep your best customers coming back &#8212; and spending more each time.</p><div class="dm-service-bar"></div></div>
+<div class="dm-service"><div class="dm-service-top"><i class="ti ti-users"></i><span>CRM &amp; customer tracking</span></div><p>Know who your customers are, what they buy, and when to reach out &#8212; without a full-time sales team.</p><div class="dm-service-bar"></div></div>
+<div class="dm-service"><div class="dm-service-top"><i class="ti ti-mail"></i><span>Automated email &amp; follow-up</span></div><p>Reach customers at the right moment with automated messages that bring them back &#8212; no manual effort required.</p><div class="dm-service-bar"></div></div>
+<div class="dm-service"><div class="dm-service-top"><i class="ti ti-map-pin"></i><span>Local search &amp; Google presence</span></div><p>Show up when nearby customers are actively looking for what you offer &#8212; the highest-intent traffic there is.</p><div class="dm-service-bar"></div></div>
+<div class="dm-service"><div class="dm-service-top"><i class="ti ti-chart-line"></i><span>Analytics &amp; growth reporting</span></div><p>Clear dashboards that show what&#8217;s actually driving revenue, so you stop guessing and start investing wisely.</p><div class="dm-service-bar"></div></div>
+</div></div></section>
+<section class="dm-cta" id="dm-contact"><div class="dm-cta-glow"></div>
+<div class="dm-cta-inner"><span class="dm-label">Get in touch</span>
+<h2>Ready to grow your business?</h2>
+<p class="dm-cta-desc">No fluff, no jargon. Just a quick conversation about where digital can make the biggest difference for you.</p>
+<div class="dm-cta-box">
+<p class="dm-cta-box-text">Drop me a line and I&#8217;ll get back to you within one business day. First call is free &#8212; no pressure, no pitch deck.</p>
+<a class="dm-email-btn" href="mailto:seth01iam@gmail.com"><i class="ti ti-mail"></i>seth01iam@gmail.com</a>
+<p class="dm-cta-note">Free 30-min intro call &#183; Based in Brookfield, WI &#183; Available remotely</p>
+</div></div></section>
+<footer class="dm-footer"><p>Seth Schmidt &#183; Digital Consultant &#183; Brookfield, Wisconsin</p></footer>
+</div>
+<!-- /wp:html -->
+</body>
+</html>
