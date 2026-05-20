@@ -1,0 +1,12 @@
+# Ignore everything by default
+*
+
+# Except the site files
+!.gitignore
+!_redirects
+!netlify.toml
+!*.html
+!*.jpg
+!*.jpeg
+!*.png
+!*.webp

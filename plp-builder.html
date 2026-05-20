@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>PLP Builder | Seth Schmidt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e8e8e8; min-height: 100vh; }
+
+.builder { max-width: 740px; margin: 0 auto; padding: 64px 24px 100px; }
+.builder h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.subtitle { font-size: 14px; color: #555; margin-bottom: 52px; }
+
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #D4A574; margin: 40px 0 18px; }
+
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 600; color: #888; margin-bottom: 6px; }
+.field .hint { font-size: 12px; color: #444; margin-top: 4px; font-style: italic; }
+.field input, .field textarea {
+  width: 100%; background: #111; border: 1px solid #1e1e1e;
+  border-radius: 8px; padding: 12px 14px; font-family: 'Inter', sans-serif;
+  font-size: 15px; color: #e8e8e8; outline: none; transition: border-color 0.15s; resize: vertical;
+}
+.field input:focus, .field textarea:focus { border-color: rgba(212,165,116,.5); }
+.field input::placeholder, .field textarea::placeholder { color: #333; }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* URL Preview */
+.url-section { margin-top: 48px; }
+.url-box { background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px 20px 16px; }
+.url-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #444; margin-bottom: 10px; }
+.url-text { font-size: 13px; color: #D4A574; font-family: 'Courier New', monospace; line-height: 1.7; word-break: break-all; min-height: 20px; }
+.url-text.empty { color: #333; font-family: 'Inter', sans-serif; font-style: italic; }
+
+/* Actions */
+.actions { display: flex; gap: 12px; margin-top: 16px; align-items: center; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 13px 26px; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: opacity 0.15s, transform 0.15s; text-decoration: none; }
+.btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-primary { background: #D4A574; color: #000; }
+.btn-outline { background: transparent; color: #D4A574; border: 2px solid #D4A574; }
+.copy-feedback { font-size: 13px; color: #6dbf67; opacity: 0; transition: opacity 0.2s; }
+.copy-feedback.show { opacity: 1; }
+
+/* Divider */
+.divider { border: none; border-top: 1px solid #141414; margin: 0; }
+
+@media (max-width: 600px) {
+  .row-2 { grid-template-columns: 1fr; }
+  .actions { flex-direction: column; align-items: flex-start; }
+  .btn { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="builder">
+
+  <h1>PLP Builder</h1>
+  <p class="subtitle">Fill in the fields, preview the page, then copy the link to send to your prospect.</p>
+
+  <hr class="divider">
+
+  <div class="section-label">Prospect Info</div>
+  <div class="row-2">
+    <div class="field">
+      <label>Business Name *</label>
+      <input type="text" id="business" placeholder="Sluggo's Bar & Grill">
+    </div>
+    <div class="field">
+      <label>Owner / Contact Name *</label>
+      <input type="text" id="owner" placeholder="Mike">
+    </div>
+  </div>
+  <div class="row-2">
+    <div class="field">
+      <label>City *</label>
+      <input type="text" id="city" placeholder="Milwaukee">
+    </div>
+    <div class="field">
+      <label>Business Type *</label>
+      <input type="text" id="type" placeholder="bar & grill">
+      <p class="hint">Used in "looking for a [type] in [city]" — keep it lowercase</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-label">Personalized Copy</div>
+
+  <div class="field">
+    <label>Opening Hook — the sentence after "Hi [Owner] —"</label>
+    <textarea id="hook" rows="2" placeholder="I've been following Sluggo's and noticed your Google reviews are great — but your online presence isn't keeping up."></textarea>
+    <p class="hint">1–2 sentences. Keep it specific and observation-based, not salesy.</p>
+  </div>
+
+  <div class="field">
+    <label>Opportunity — what they're missing out on</label>
+    <textarea id="opp" rows="2" placeholder="The top results for 'bar Milwaukee' are going to competitors who've optimized their listings — not necessarily better ones."></textarea>
+    <p class="hint">This fills the "Customers are searching... [opportunity]" line.</p>
+  </div>
+
+  <hr class="divider">
+  <div class="section-label">What I Found — 3 Gaps</div>
+
+  <div class="field">
+    <label>Gap 1</label>
+    <textarea id="gap1" rows="2" placeholder="Your Google Business profile is missing hours, photos, and a description — costing you clicks every day."></textarea>
+  </div>
+  <div class="field">
+    <label>Gap 2</label>
+    <textarea id="gap2" rows="2" placeholder="Your website isn't mobile-friendly — over 70% of local searches happen on phones."></textarea>
+  </div>
+  <div class="field">
+    <label>Gap 3</label>
+    <textarea id="gap3" rows="2" placeholder="There's no way to capture customer emails or run repeat-visit incentives."></textarea>
+  </div>
+
+  <div class="url-section">
+    <div class="url-box">
+      <div class="url-label">Your Prospect Link</div>
+      <div class="url-text empty" id="urlPreview">Start filling in the fields above to generate your link.</div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="openPreview()">👁&nbsp; Preview Page</button>
+      <button class="btn btn-outline" onclick="copyLink()">📋&nbsp; Copy Link</button>
+      <span class="copy-feedback" id="copyFeedback">✓ Copied to clipboard</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var BASE = 'https://teamschmidt.net/plp-template';
+var FIELDS = ['business','owner','city','type','hook','opp','gap1','gap2','gap3'];
+
+function buildUrl() {
+  var params = new URLSearchParams();
+  var hasRequired = false;
+  FIELDS.forEach(function(id) {
+    var val = (document.getElementById(id).value || '').trim();
+    if (val) params.set(id, val);
+  });
+  var biz = (document.getElementById('business').value || '').trim();
+  var owner = (document.getElementById('owner').value || '').trim();
+  if (!biz && !owner) return null;
+  return BASE + '?' + params.toString();
+}
+
+function updatePreview() {
+  var url = buildUrl();
+  var el = document.getElementById('urlPreview');
+  if (url) {
+    el.textContent = url;
+    el.classList.remove('empty');
+  } else {
+    el.textContent = 'Start filling in the fields above to generate your link.';
+    el.classList.add('empty');
+  }
+}
+
+function openPreview() {
+  var url = buildUrl();
+  if (url) window.open(url, '_blank');
+  else alert('Fill in at least Business Name or Owner to preview.');
+}
+
+function copyLink() {
+  var url = buildUrl();
+  if (!url) { alert('Fill in at least Business Name or Owner first.'); return; }
+  navigator.clipboard.writeText(url).then(function() {
+    var fb = document.getElementById('copyFeedback');
+    fb.classList.add('show');
+    setTimeout(function() { fb.classList.remove('show'); }, 2500);
+  }).catch(function() {
+    prompt('Copy this link:', url);
+  });
+}
+
+FIELDS.forEach(function(id) {
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+</script>
+</body>
+</html>
