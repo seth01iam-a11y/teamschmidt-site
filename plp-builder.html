@@ -28,23 +28,26 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e8e8e8; mi
 .field input::placeholder, .field textarea::placeholder { color: #333; }
 .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-/* URL Preview */
 .url-section { margin-top: 48px; }
 .url-box { background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px 20px 16px; }
 .url-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #444; margin-bottom: 10px; }
 .url-text { font-size: 13px; color: #D4A574; font-family: 'Courier New', monospace; line-height: 1.7; word-break: break-all; min-height: 20px; }
 .url-text.empty { color: #333; font-family: 'Inter', sans-serif; font-style: italic; }
 
-/* Actions */
 .actions { display: flex; gap: 12px; margin-top: 16px; align-items: center; flex-wrap: wrap; }
 .btn { display: inline-block; padding: 13px 26px; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: opacity 0.15s, transform 0.15s; text-decoration: none; }
 .btn:hover { opacity: 0.85; transform: translateY(-1px); }
 .btn-primary { background: #D4A574; color: #000; }
 .btn-outline { background: transparent; color: #D4A574; border: 2px solid #D4A574; }
-.copy-feedback { font-size: 13px; color: #6dbf67; opacity: 0; transition: opacity 0.2s; }
-.copy-feedback.show { opacity: 1; }
+.status-msg { font-size: 13px; color: #6dbf67; opacity: 0; transition: opacity 0.2s; flex-basis: 100%; margin-top: 4px; }
+.status-msg.show { opacity: 1; }
+.status-msg.error { color: #e06c6c; }
 
-/* Divider */
+.instructions { margin-top: 28px; background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px 24px; }
+.instructions p { font-size: 13px; color: #555; line-height: 1.9; }
+.instructions strong { color: #888; }
+.instructions code { font-family: 'Courier New', monospace; color: #D4A574; font-size: 12px; background: #111; padding: 2px 6px; border-radius: 4px; }
+
 .divider { border: none; border-top: 1px solid #141414; margin: 0; }
 
 @media (max-width: 600px) {
@@ -58,7 +61,7 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e8e8e8; mi
 <div class="builder">
 
   <h1>PLP Builder</h1>
-  <p class="subtitle">Fill in the fields, preview the page, then copy the link to send to your prospect.</p>
+  <p class="subtitle">Fill in the fields, generate a page file, drop it in your folder, and deploy. Each prospect gets their own clean URL.</p>
 
   <hr class="divider">
 
@@ -118,68 +121,148 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e8e8e8; mi
 
   <div class="url-section">
     <div class="url-box">
-      <div class="url-label">Your Prospect Link</div>
-      <div class="url-text empty" id="urlPreview">Start filling in the fields above to generate your link.</div>
+      <div class="url-label">Prospect URL (after deploy)</div>
+      <div class="url-text empty" id="urlPreview">Fill in a business name to see the URL.</div>
     </div>
     <div class="actions">
-      <button class="btn btn-primary" onclick="openPreview()">👁&nbsp; Preview Page</button>
-      <button class="btn btn-outline" onclick="copyLink()">📋&nbsp; Copy Link</button>
-      <span class="copy-feedback" id="copyFeedback">✓ Copied to clipboard</span>
+      <button class="btn btn-primary" onclick="generatePage()">⬇&nbsp; Generate &amp; Download Page</button>
+      <button class="btn btn-outline" onclick="openPreview()">👁&nbsp; Preview</button>
+      <span class="status-msg" id="statusMsg"></span>
+    </div>
+    <div class="instructions">
+      <p>
+        <strong>To deploy a prospect page:</strong><br>
+        1. Click <strong>Generate &amp; Download Page</strong> — saves <code>[slug].html</code> to your Downloads<br>
+        2. Move that file into your <code>Website Design</code> folder<br>
+        3. Run <code>deploy.bat</code><br>
+        4. Share <code>teamschmidt.net/[slug]</code> with your prospect
+      </p>
     </div>
   </div>
 
 </div>
 
 <script>
-var BASE = 'https://teamschmidt.net/plp-template';
-var FIELDS = ['business','owner','city','type','hook','opp','gap1','gap2','gap3'];
+function toSlug(str) {
+  return str.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
 
-function buildUrl() {
-  var params = new URLSearchParams();
-  var hasRequired = false;
-  FIELDS.forEach(function(id) {
-    var val = (document.getElementById(id).value || '').trim();
-    if (val) params.set(id, val);
-  });
-  var biz = (document.getElementById('business').value || '').trim();
-  var owner = (document.getElementById('owner').value || '').trim();
-  if (!biz && !owner) return null;
-  return BASE + '?' + params.toString();
+function getSlug() {
+  return toSlug((document.getElementById('business').value || '').trim());
 }
 
 function updatePreview() {
-  var url = buildUrl();
+  var slug = getSlug();
   var el = document.getElementById('urlPreview');
-  if (url) {
-    el.textContent = url;
+  if (slug) {
+    el.textContent = 'teamschmidt.net/' + slug;
     el.classList.remove('empty');
   } else {
-    el.textContent = 'Start filling in the fields above to generate your link.';
+    el.textContent = 'Fill in a business name to see the URL.';
     el.classList.add('empty');
   }
 }
 
+function getVals() {
+  return {
+    BUSINESS_NAME: (document.getElementById('business').value || '').trim(),
+    OWNER_NAME:    (document.getElementById('owner').value || '').trim(),
+    CITY:          (document.getElementById('city').value || '').trim(),
+    BUSINESS_TYPE: (document.getElementById('type').value || '').trim(),
+    BUSINESS_HOOK: (document.getElementById('hook').value || '').trim(),
+    OPPORTUNITY:   (document.getElementById('opp').value || '').trim(),
+    GAP_1:         (document.getElementById('gap1').value || '').trim(),
+    GAP_2:         (document.getElementById('gap2').value || '').trim(),
+    GAP_3:         (document.getElementById('gap3').value || '').trim()
+  };
+}
+
+function buildFilledHTML(template, vals) {
+  var html = template;
+
+  // Update page title
+  html = html.replace(/<title>[^<]*<\/title>/, '<title>Built for ' + escHtml(vals.BUSINESS_NAME) + ' | Seth Schmidt<\/title>');
+
+  // Remove the URL param personalization JS block (values are baked in)
+  html = html.replace(/<!-- URL Param Personalization[\s\S]*?<\/script>/, '');
+
+  // Remove the DOMContentLoaded token replacement script
+  html = html.replace(/<!-- Fill tokens from URL params -->[\s\S]*?<\/script>/, '');
+
+  // Replace each data-token span's text content
+  var keys = Object.keys(vals);
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = vals[key] ? escHtml(vals[key]) : '[' + key + ']';
+    var re = new RegExp('(data-token="' + key + '">)[^<]*', 'g');
+    html = html.replace(re, '$1' + val.replace(/\$/g, '$$$$'));
+  }
+
+  return html;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function generatePage() {
+  var biz = (document.getElementById('business').value || '').trim();
+  if (!biz) { showStatus('Fill in a business name first.', true); return; }
+
+  var slug = getSlug();
+  var vals = getVals();
+
+  showStatus('Fetching template...', false);
+
+  fetch('/plp-template.html')
+    .then(function(r) {
+      if (!r.ok) throw new Error('Could not load template (status ' + r.status + ')');
+      return r.text();
+    })
+    .then(function(template) {
+      var html = buildFilledHTML(template, vals);
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = slug + '.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showStatus('✓ Downloaded ' + slug + '.html — move it to your Website Design folder, then run deploy.bat', false);
+    })
+    .catch(function(e) {
+      showStatus('Error: ' + e.message + '. Try the Preview button to verify fields look right.', true);
+    });
+}
+
 function openPreview() {
-  var url = buildUrl();
-  if (url) window.open(url, '_blank');
-  else alert('Fill in at least Business Name or Owner to preview.');
-}
-
-function copyLink() {
-  var url = buildUrl();
-  if (!url) { alert('Fill in at least Business Name or Owner first.'); return; }
-  navigator.clipboard.writeText(url).then(function() {
-    var fb = document.getElementById('copyFeedback');
-    fb.classList.add('show');
-    setTimeout(function() { fb.classList.remove('show'); }, 2500);
-  }).catch(function() {
-    prompt('Copy this link:', url);
+  var vals = getVals();
+  if (!vals.BUSINESS_NAME) { showStatus('Fill in a business name to preview.', true); return; }
+  var params = new URLSearchParams({
+    business: vals.BUSINESS_NAME, owner: vals.OWNER_NAME,
+    city: vals.CITY, type: vals.BUSINESS_TYPE,
+    hook: vals.BUSINESS_HOOK, opp: vals.OPPORTUNITY,
+    gap1: vals.GAP_1, gap2: vals.GAP_2, gap3: vals.GAP_3
   });
+  window.open('/plp-template?' + params.toString(), '_blank');
 }
 
-FIELDS.forEach(function(id) {
-  document.getElementById(id).addEventListener('input', updatePreview);
-});
+function showStatus(msg, isError) {
+  var el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.classList.remove('show', 'error');
+  if (isError) el.classList.add('error');
+  void el.offsetWidth;
+  el.classList.add('show');
+}
+
+document.getElementById('business').addEventListener('input', updatePreview);
 </script>
 </body>
 </html>
